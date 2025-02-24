@@ -1,0 +1,78 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+from imageio import imread
+from skimage.transform import resize
+
+def mass_center(img, is_round=True):
+    Y = img.mean(axis=1)
+    X = img.mean(axis=0)
+    Y_ = np.sum(np.arange(Y.shape[0]) * Y) / np.sum(Y)
+    X_ = np.sum(np.arange(X.shape[0]) * X) / np.sum(X)
+    if is_round:
+        return int(round(X_)), int(round(Y_))
+    return X_, Y_
+
+def image_extract(img, newsize):
+    if img.mean() == 0:  
+        return np.zeros(newsize)
+
+    non_zero_columns = np.where(img.mean(axis=0) != 0)[0]
+    non_zero_rows = np.where(img.mean(axis=1) != 0)[0]
+
+    if len(non_zero_columns) == 0 or len(non_zero_rows) == 0:
+        return np.zeros(newsize)  
+
+    x_s = non_zero_columns.min()
+    x_e = non_zero_columns.max()
+
+    y_s = non_zero_rows.min()
+    y_e = non_zero_rows.max()
+
+    x_c, _ = mass_center(img)
+    x_s = x_c - newsize[1] // 2
+    x_e = x_c + newsize[1] // 2
+
+    img = img[y_s:y_e, max(0, x_s):min(x_e, img.shape[1])]
+    img_resized = resize(img, newsize, anti_aliasing=True)
+    return img_resized
+
+def process_folder(input_folder, output_folder_base):
+    image_counters = {}
+    for subdir, _, files in os.walk(input_folder):
+        if not files:
+            continue
+        images = [imread(os.path.join(subdir, f)) for f in files if f.endswith(('.png', '.jpg', '.jpeg', '.bmp'))]
+
+        if not images:
+            continue
+
+        images = [image_extract(img, (128, 64)) for img in images]
+
+        if not images or all(img.size == 0 for img in images):
+            continue
+
+        gei = np.mean(images, axis=0)
+
+        if gei.size == 0 or len(gei.shape) == 0:
+            continue
+
+        relative_path = os.path.relpath(subdir, input_folder)
+        output_folder = os.path.join(output_folder_base, relative_path)
+        os.makedirs(output_folder, exist_ok=True)
+
+        if relative_path not in image_counters:
+            image_counters[relative_path] = 1
+        output_file = os.path.join(output_folder, f'gei_output_{image_counters[relative_path]}.png')
+
+        plt.imshow(gei, cmap='gray')
+        plt.axis('off')
+        plt.savefig(output_file, bbox_inches='tight', pad_inches=0)
+        plt.close()
+
+        image_counters[relative_path] += 1
+
+input_folder = '/home/sazid/Model_Based_GAIT_PROJECT/casia_sl/' 
+output_folder_base = '/home/sazid/Model_Based_GAIT_PROJECT/Pre_Processing/output/GEI_Image/'  
+process_folder(input_folder, output_folder_base)
+
