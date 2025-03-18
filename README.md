@@ -2,15 +2,14 @@
 This repository presents an advanced approach to gait identification using three prominent template-based methods: Gait Energy Image (GEI), Gait Moment Image (GMI), and Motion Flow Energy Image (MFEI). The study leverages the CASIA-B dataset to extract gait features and enhance recognition performance.
 
 ## Methodology
-Feature Extraction
+Feature Extraction\
 The extracted gait templates were refined using the Histogram of Oriented Gradients (HOG), a powerful feature descriptor known for capturing detailed edge and gradient information.
 
-Dimensionality Reduction
+Dimensionality Reduction\
 To enhance computational efficiency and ensure the most discriminative features are retained, Linear Discriminant Analysis (LDA) was employed as the dimensionality reduction technique. LDA optimally separates different gait patterns, improving classification accuracy.
 
-Classification
-Three distinct classifiers were evaluated to determine the best approach for gait recognition:
-
+Classification\
+Three distinct classifiers were evaluated to determine the best approach for gait recognition:\
 Support Vector Machine (SVM)\
 k-Nearest Neighbors (KNN)\
 Nearest Centroid (NC)
