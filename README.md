@@ -19,9 +19,9 @@ The performance analysis of different gait templates and classifiers revealed th
 
 ## Key Contributions
 ✅ Implementation of GEI, GMI, and MFEI for gait recognition \
-✅ Feature extraction using HOG for detailed edge representation
-✅ Dimensionality reduction with LDA for optimal feature selection
-✅ Comparative analysis of SVM, KNN, and NC classifiers
+✅ Feature extraction using HOG for detailed edge representation \
+✅ Dimensionality reduction with LDA for optimal feature selection \
+✅ Comparative analysis of SVM, KNN, and NC classifiers \
 ✅ Identification of the GMI-NC combination as the most effective
 
 ## Potential Applications
