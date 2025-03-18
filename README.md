@@ -11,9 +11,10 @@ To enhance computational efficiency and ensure the most discriminative features 
 Classification
 Three distinct classifiers were evaluated to determine the best approach for gait recognition:
 
-Support Vector Machine (SVM)
-k-Nearest Neighbors (KNN)
-Nearest Centroid (NC)
+Support Vector Machine (SVM)\
+k-Nearest Neighbors (KNN)\
+Nearest Centroid (NC)\
+
 Results and Findings
 The performance analysis of different gait templates and classifiers revealed that the GMI-NC combination achieved the best results. Specifically, the Nearest Centroid (NC) classifier with GMI features outperformed other methods, attaining an average accuracy of 82.82%. This combination demonstrated superior robustness across various covariate conditions, such as walking while carrying a bag, wearing a coat, and different viewing angles.
 
