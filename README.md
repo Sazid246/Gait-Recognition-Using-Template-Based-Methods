@@ -18,7 +18,7 @@ Results and Findings
 The performance analysis of different gait templates and classifiers revealed that the GMI-NC combination achieved the best results. Specifically, the Nearest Centroid (NC) classifier with GMI features outperformed other methods, attaining an average accuracy of 82.82%. This combination demonstrated superior robustness across various covariate conditions, such as walking while carrying a bag, wearing a coat, and different viewing angles.
 
 ## Key Contributions
-✅ Implementation of GEI, GMI, and MFEI for gait recognition \n
+✅ Implementation of GEI, GMI, and MFEI for gait recognition \\
 ✅ Feature extraction using HOG for detailed edge representation
 ✅ Dimensionality reduction with LDA for optimal feature selection
 ✅ Comparative analysis of SVM, KNN, and NC classifiers
